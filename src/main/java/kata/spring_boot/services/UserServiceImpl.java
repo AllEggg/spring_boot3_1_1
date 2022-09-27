@@ -22,13 +22,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User getUser(Long id) {
-        return userRepository.findUserById(id);
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
     @Transactional
     public void deleteUser(Long id) {
-        userRepository.deleteUserById(id);
+        userRepository.deleteById(id);
     }
 
     @Override
@@ -40,6 +40,6 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public void editUser(User user) {
-        userRepository.editUser(user.getId(), user.getName(), user.getAge());
+        userRepository.save(user);
     }
 }
